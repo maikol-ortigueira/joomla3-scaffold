@@ -1,1 +1,2 @@
 jdb_drop
+jdb_drop_frontpage

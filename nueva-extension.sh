@@ -1,5 +1,7 @@
 #!/bin/bash
 
+RUTA_CARPETAS=~/Escritorio/repositorios/joomla3-scaffold;
+
 clear
 
 stty erase '^?'
@@ -60,11 +62,11 @@ if [ "$scaffold" = "1" ]; then
 	echo
 	read donde
 	if [ "$donde" = "1" ]; then
-		cp -R /home/maikol/plantillas/joomla3-carpetas/modules/admin/mod_{{module}} ./mod_$modulo
+		cp -R ${RUTA_CARPETAS}/modules/admin/mod_{{module}} ./mod_$modulo
 		find ./mod_$modulo -name "*{{module}}*" | rename "s/\{\{module\}\}/$modulo/"
 	fi
 	if [ "$donde" = "2" ]; then
-		cp -R /home/maikol/plantillas/joomla3-carpetas/modules/site/mod_{{module}} ./mod_$modulo
+		cp -R ${RUTA_CARPETAS}/modules/site/mod_{{module}} ./mod_$modulo
 		find ./mod_$modulo -name "*{{module}}*" | rename "s/\{\{module\}\}/$modulo/"
 	fi
 
@@ -100,10 +102,31 @@ if [ "$scaffold" = "2" ]; then
 	echo
 	read componente
 
-	cp -R /home/maikol/plantillas/joomla3-carpetas/components/com_{{component}} ./com_$componente
+	cp -R ${RUTA_CARPETAS}/components/com_{{component}} ./com_$componente
 	find ./com_$componente -name "*{{component}}*" | rename "s/\{\{component\}\}/$componente/"
 	echo
 	clear
+
+	echo
+	echo -n "Cual es el nombre singular de la vista principal?: "
+	echo
+	read singular
+
+	find ./com_$componente -name "*{{singular}}*" | rename "s/\{\{singular\}\}/$singular/"
+	echo
+	clear
+
+	echo
+	echo -n "Cual es el nombre plural de la vista principal?: "
+	echo
+	read plural
+
+	find ./com_$componente -name "*{{plural}}*" | rename "s/\{\{plural\}\}/$plural/"
+	echo
+	clear
+
+
+
 	echo
 	echo
 	echo "-----------------------------------------------------------------------------"
